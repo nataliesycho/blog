@@ -5,7 +5,7 @@ export const SITE = {
   // Short tagline shown under your name on the home page.
   description: "Writing on product, technology, and the things I'm figuring out.",
   // Your public URL. Update this once you deploy (used for RSS + SEO).
-  url: "https://example.com",
+  url: "https://blog-lilac-five-99.vercel.app",
   author: "Natalie Cho",
   email: "nataliesycho@gmail.com",
 };
