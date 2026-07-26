@@ -51,8 +51,9 @@
   --measure: 40rem; /* ~640px reading column */
   --gap: 1.5rem;
 
-  --fs-base: 1.0625rem; /* 17px */
-  --lh-base: 1.7;
+  /* Inter has a large x-height, so 16px reads like 17px of the system font. */
+  --fs-base: 1rem; /* 16px */
+  --lh-base: 1.68;
 }
 
 :root[data-font="serif"] {
@@ -102,8 +103,10 @@ body {
   font-family: var(--font-body);
   font-size: var(--fs-base);
   line-height: var(--lh-base);
+  letter-spacing: -0.011em;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  font-optical-sizing: auto;
   font-feature-settings: "kern", "liga";
   transition: background 0.2s ease, color 0.2s ease;
 }
