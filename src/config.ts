@@ -10,10 +10,7 @@ export const SITE = {
   email: "nataliesycho@gmail.com",
 };
 
-// Default typography. Flip between "sans" and "serif" to change the whole
-// site's feel. There is also a live toggle in the footer so you can compare
-// both in the browser — once you decide, set your favorite here and you can
-// delete the FontToggle component.
+// Site typography. Set to "sans" or "serif" to change the whole site's feel.
 export const DEFAULT_FONT: "sans" | "serif" = "sans";
 
 // Links shown in the header nav.

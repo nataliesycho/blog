@@ -39,6 +39,5 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
 <script is:inline define:vars={{ DEFAULT_FONT }}>
   const theme = localStorage.getItem("theme");
   if (theme) document.documentElement.setAttribute("data-theme", theme);
-  const font = localStorage.getItem("font") || DEFAULT_FONT;
-  document.documentElement.setAttribute("data-font", font);
+  document.documentElement.setAttribute("data-font", DEFAULT_FONT);
 </script>
