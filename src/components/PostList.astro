@@ -1,0 +1,76 @@
+---
+import { formatDate, isoDate } from "../utils/date";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  posts: CollectionEntry<"writing">[];
+}
+
+const { posts } = Astro.props;
+---
+
+<ul class="post-list">
+  {
+    posts.map((post) => (
+      <li class="post-item">
+        <a href={`/writing/${post.id}`} class="post-link">
+          <span class="post-title">{post.data.title}</span>
+          <time class="post-date mono" datetime={isoDate(post.data.pubDate)}>
+            {formatDate(post.data.pubDate)}
+          </time>
+        </a>
+        {post.data.description && (
+          <p class="post-desc muted">{post.data.description}</p>
+        )}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .post-item {
+    padding: 1.15rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .post-item:first-child {
+    padding-top: 0;
+  }
+  .post-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .post-title {
+    font-weight: 560;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color 0.15s ease;
+  }
+  .post-link:hover .post-title {
+    text-decoration-color: var(--text-muted);
+  }
+  .post-date {
+    color: var(--text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .post-desc {
+    margin: 0.4rem 0 0;
+    font-size: 0.95rem;
+  }
+  @media (max-width: 34rem) {
+    .post-link {
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+  }
+</style>

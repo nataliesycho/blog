@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostList from "../../components/PostList.astro";
+
+const posts = (await getCollection("writing", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout title="Writing" description="Essays and notes.">
+  <h1>Writing</h1>
+  <p class="muted intro">Essays, notes, and things I'm thinking through.</p>
+  <PostList posts={posts} />
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-top: -0.4rem;
+    margin-bottom: 2.5rem;
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { formatDate, isoDate } from "../utils/date";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"writing">;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, tags } = post.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <article>
+    <header class="post-head">
+      <h1>{title}</h1>
+      <div class="meta mono">
+        <time datetime={isoDate(pubDate)}>{formatDate(pubDate)}</time>
+        {
+          updatedDate && (
+            <span>· updated {formatDate(updatedDate)}</span>
+          )
+        }
+        {tags.length > 0 && <span>· {tags.join(", ")}</span>}
+      </div>
+    </header>
+
+    <div class="prose">
+      <slot />
+    </div>
+
+    <div class="post-foot">
+      <a href="/writing">← All writing</a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-head {
+    margin-bottom: 2.25rem;
+  }
+  .meta {
+    color: var(--text-muted);
+    margin-top: 0.6rem;
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .post-foot {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .post-foot a {
+    text-decoration: none;
+    color: var(--text-muted);
+  }
+  .post-foot a:hover {
+    color: var(--text);
+  }
+</style>

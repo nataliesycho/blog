@@ -1,0 +1,64 @@
+---
+import { SITE, NAV } from "../config";
+import ThemeToggle from "./ThemeToggle.astro";
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="wrap inner">
+    <a href="/" class="brand">{SITE.title}</a>
+    <nav>
+      {
+        NAV.map((item) => (
+          <a href={item.href} class:list={["nav-link", { active: isActive(item.href) }]}>
+            {item.label}
+          </a>
+        ))
+      }
+      <ThemeToggle />
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+  }
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.1rem;
+  }
+  .brand {
+    font-weight: 640;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    color: var(--text);
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .nav-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: 8px;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .nav-link:hover {
+    color: var(--text);
+    background: var(--bg-subtle);
+  }
+  .nav-link.active {
+    color: var(--text);
+  }
+</style>

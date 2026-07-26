@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostList from "../components/PostList.astro";
+import { SITE } from "../config";
+
+const posts = (await getCollection("writing", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
+---
+
+<BaseLayout>
+  <section class="intro">
+    <h1>{SITE.title}</h1>
+    <p class="lede">
+      Hi, I'm Natalie. I write about product, technology, and the things I'm
+      figuring out as I go. This is where I think out loud.
+    </p>
+  </section>
+
+  <section class="recent">
+    <div class="section-head">
+      <h2>Writing</h2>
+      <a href="/writing" class="mono see-all">See all →</a>
+    </div>
+    <PostList posts={posts} />
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-bottom: 3.5rem;
+  }
+  .lede {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 34rem;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  .section-head h2 {
+    margin: 0;
+  }
+  .see-all {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  .see-all:hover {
+    color: var(--text);
+  }
+</style>

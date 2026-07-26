@@ -1,0 +1,57 @@
+---
+import { SITE, SOCIALS } from "../config";
+import FontToggle from "./FontToggle.astro";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap inner">
+    <div class="left">
+      <span class="muted">© {year} {SITE.author}</span>
+      <span class="links">
+        {
+          SOCIALS.map((s) => (
+            <a href={s.href} class="muted">
+              {s.label}
+            </a>
+          ))
+        }
+      </span>
+    </div>
+    <!-- Remove <FontToggle /> once you've picked a font in config.ts -->
+    <FontToggle />
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    margin-top: 4rem;
+    padding-block: 1.75rem;
+    font-size: 0.85rem;
+  }
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .links {
+    display: flex;
+    gap: 0.9rem;
+  }
+  .links a {
+    text-decoration: none;
+  }
+  .links a:hover {
+    color: var(--text);
+  }
+</style>

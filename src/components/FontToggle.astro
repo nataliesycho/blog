@@ -1,0 +1,42 @@
+---
+// Temporary helper so you can compare the sans vs. serif feel live.
+// Once you've decided, set DEFAULT_FONT in src/config.ts and delete this
+// component (and its usage in Footer.astro).
+---
+
+<button id="font-toggle" type="button" class="font-btn" aria-label="Toggle serif / sans">
+  <span class="label-sans">Aa Sans</span>
+  <span class="label-serif">Aa Serif</span>
+</button>
+
+<style>
+  .font-btn {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.35rem 0.6rem;
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .font-btn:hover {
+    color: var(--text);
+    border-color: var(--text-muted);
+  }
+  .label-serif { display: none; }
+  :global(:root[data-font="serif"]) .label-sans { display: none; }
+  :global(:root[data-font="serif"]) .label-serif { display: inline; }
+</style>
+
+<script>
+  const btn = document.getElementById("font-toggle");
+  btn?.addEventListener("click", () => {
+    const root = document.documentElement;
+    const next = root.getAttribute("data-font") === "serif" ? "sans" : "serif";
+    root.setAttribute("data-font", next);
+    localStorage.setItem("font", next);
+  });
+</script>

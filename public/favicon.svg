@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    rect { fill: #1a1a1a; }
+    text { fill: #ffffff; }
+    @media (prefers-color-scheme: dark) {
+      rect { fill: #e9e9e6; }
+      text { fill: #111113; }
+    }
+  </style>
+  <rect width="100" height="100" rx="22" />
+  <text x="50" y="54" font-family="ui-sans-serif, system-ui, sans-serif"
+    font-size="60" font-weight="650" text-anchor="middle"
+    dominant-baseline="central">N</text>
+</svg>

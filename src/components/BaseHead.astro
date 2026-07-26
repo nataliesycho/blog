@@ -1,0 +1,44 @@
+---
+import { SITE, DEFAULT_FONT } from "../config";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = SITE.description } = Astro.props;
+const pageTitle = title ? `${title} — ${SITE.title}` : SITE.title;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={SITE.title}
+  href="/rss.xml"
+/>
+
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+<meta name="author" content={SITE.author} />
+<link rel="canonical" href={canonical} />
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Set theme + font before paint to avoid a flash. -->
+<script is:inline define:vars={{ DEFAULT_FONT }}>
+  const theme = localStorage.getItem("theme");
+  if (theme) document.documentElement.setAttribute("data-theme", theme);
+  const font = localStorage.getItem("font") || DEFAULT_FONT;
+  document.documentElement.setAttribute("data-font", font);
+</script>
